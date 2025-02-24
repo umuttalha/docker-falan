@@ -1,0 +1,22 @@
+# FROM gcc:7
+
+# WORKDIR /app
+# COPY main.cpp .
+
+# RUN g++ -std=c++11 main.cpp -o main
+
+# CMD ["./main"] 
+
+# Build stage
+FROM alpine:3.18 AS builder
+RUN apk add --no-cache g++ make
+
+WORKDIR /app
+COPY main.cpp .
+RUN g++ -std=c++11 main.cpp -o main
+
+# Runtime stage
+FROM alpine:3.18
+WORKDIR /app
+COPY --from=builder /app/main .
+CMD ["./main"]

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  cpp11:
+    build:
+      context: ./cpp11
+      dockerfile: Dockerfile.cpp11
+    container_name: cpp11_app
+
+  cpp17:
+    build:
+      context: ./cpp17
+      dockerfile: Dockerfile.cpp17
+    container_name: cpp17_app
